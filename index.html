@@ -1,542 +1,398 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Loki | Time Variance Authority</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Montserrat:wght@400;600;700&display=swap');
+    <meta
+        name="description"
+        content="Experiência interativa inspirada no universo de Loki."
+    >
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <title>LOKI | TVA</title>
 
-        html {
-            scroll-behavior: smooth;
-        }
+    <!-- FONTES -->
 
-        body {
-            background: #050806;
-            color: #f1e9cf;
-            font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden;
-        }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-        /* =========================
-           FUNDO
-        ========================= */
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background:
-                radial-gradient(circle at 20% 20%, rgba(44, 125, 74, .18), transparent 30%),
-                radial-gradient(circle at 80% 70%, rgba(190, 151, 54, .12), transparent 30%);
-            pointer-events: none;
-            z-index: -1;
-        }
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
-        /* =========================
-           NAVBAR
-        ========================= */
+    <!-- CSS -->
 
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            padding: 18px 7%;
-
-            background: rgba(3, 7, 5, .85);
-            backdrop-filter: blur(10px);
-
-            border-bottom: 1px solid rgba(190, 151, 54, .35);
-        }
-
-        .logo {
-            font-family: 'Cinzel', serif;
-            color: #c9a63a;
-            font-size: 1.5rem;
-            font-weight: 900;
-            letter-spacing: 4px;
-        }
-
-        nav ul {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        nav a {
-            color: #eee6ce;
-            text-decoration: none;
-            font-size: .85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-
-            transition: .3s;
-        }
-
-        nav a:hover {
-            color: #c9a63a;
-            text-shadow: 0 0 10px #c9a63a;
-        }
-
-        /* =========================
-           HERO
-        ========================= */
-
-        .hero {
-            min-height: 100vh;
-
-            display: flex;
-            align-items: center;
-
-            padding: 120px 8% 60px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    rgba(3, 7, 5, .98) 0%,
-                    rgba(3, 7, 5, .82) 45%,
-                    rgba(3, 7, 5, .25) 100%
-                ),
-                url("https://images.unsplash.com/photo-1534791547706-1f20fc6c4c55?auto=format&fit=crop&w=2000&q=85");
-
-            background-size: cover;
-            background-position: center;
-        }
-
-        .hero-content {
-            max-width: 650px;
-            animation: aparecer 1.5s ease;
-        }
-
-        .tag {
-            color: #71b77d;
-            font-weight: 700;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(4rem, 10vw, 8rem);
-            line-height: .9;
-            color: #d6b64b;
-
-            text-shadow:
-                0 0 10px rgba(214,182,75,.3),
-                5px 5px 0 #26382a;
-        }
-
-        .hero h2 {
-            font-size: 1.5rem;
-            margin: 25px 0;
-
-            color: #ddd4b9;
-        }
-
-        .hero p {
-            line-height: 1.8;
-            color: #bcb7a7;
-        }
-
-        .btn {
-            display: inline-block;
-
-            margin-top: 30px;
-            padding: 14px 30px;
-
-            color: #071008;
-            background: #c9a63a;
-
-            font-weight: 700;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-
-            border: none;
-            cursor: pointer;
-
-            transition: .3s;
-        }
-
-        .btn:hover {
-            background: #f0d56b;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(201,166,58,.3);
-        }
-
-        /* =========================
-           SEÇÕES
-        ========================= */
-
-        section {
-            padding: 100px 8%;
-        }
-
-        .section-title {
-            font-family: 'Cinzel', serif;
-            color: #c9a63a;
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-
-        .section-subtitle {
-            color: #7da885;
-            margin-bottom: 50px;
-        }
-
-        /* =========================
-           CARDS
-        ========================= */
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 25px;
-        }
-
-        .card {
-            background: linear-gradient(
-                145deg,
-                rgba(25, 43, 30, .9),
-                rgba(8, 13, 9, .95)
-            );
-
-            border: 1px solid rgba(201,166,58,.25);
-
-            padding: 30px;
-
-            position: relative;
-            overflow: hidden;
-
-            transition: .4s;
-        }
-
-        .card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 3px;
-            background: #c9a63a;
-            transition: .5s;
-        }
-
-        .card:hover::before {
-            left: 0;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(201,166,58,.7);
-            box-shadow: 0 15px 40px rgba(0,0,0,.4);
-        }
-
-        .card h3 {
-            font-family: 'Cinzel', serif;
-            color: #d6b64b;
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-        }
-
-        .card p {
-            color: #aaa99d;
-            line-height: 1.7;
-        }
-
-        /* =========================
-           GALERIA
-        ========================= */
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .gallery-item {
-            height: 300px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-
-            filter: saturate(.75) sepia(.1);
-
-            transition: .6s;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-            filter: saturate(1.1);
-        }
-
-        .gallery-item span {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-
-            padding: 20px;
-
-            background: linear-gradient(transparent, rgba(0,0,0,.9));
-
-            font-family: 'Cinzel', serif;
-            color: #e2c65d;
-        }
-
-        /* =========================
-           LINHA DO TEMPO
-        ========================= */
-
-        .timeline {
-            max-width: 900px;
-            margin: auto;
-            position: relative;
-        }
-
-        .timeline::before {
-            content: "";
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: #c9a63a;
-        }
-
-        .timeline-item {
-            width: 50%;
-            padding: 25px;
-            position: relative;
-        }
-
-        .timeline-item:nth-child(even) {
-            margin-left: 50%;
-        }
-
-        .timeline-content {
-            background: #101b13;
-            border: 1px solid rgba(201,166,58,.3);
-            padding: 25px;
-        }
-
-        .timeline-content h3 {
-            color: #d6b64b;
-            font-family: 'Cinzel', serif;
-            margin-bottom: 10px;
-        }
-
-        /* =========================
-           BOTÃO INTERATIVO
-        ========================= */
-
-        .tv-guide {
-            text-align: center;
-
-            background:
-                linear-gradient(
-                    rgba(4, 10, 6, .92),
-                    rgba(4, 10, 6, .92)
-                ),
-                url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2000&q=80");
-
-            background-size: cover;
-            background-position: center;
-        }
-
-        #quote {
-            max-width: 750px;
-            margin: 30px auto;
-
-            font-family: 'Cinzel', serif;
-            font-size: 1.7rem;
-            color: #e1cf85;
-
-            min-height: 70px;
-        }
-
-        /* =========================
-           FOOTER
-        ========================= */
-
-        footer {
-            text-align: center;
-            padding: 40px;
-
-            background: #020402;
-            border-top: 1px solid rgba(201,166,58,.25);
-
-            color: #777;
-        }
-
-        footer strong {
-            color: #c9a63a;
-        }
-
-        /* =========================
-           ANIMAÇÃO
-        ========================= */
-
-        @keyframes aparecer {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* =========================
-           RESPONSIVO
-        ========================= */
-
-        @media(max-width: 700px) {
-
-            nav {
-                padding: 15px 5%;
-            }
-
-            nav ul {
-                display: none;
-            }
-
-            section {
-                padding: 70px 6%;
-            }
-
-            .gallery {
-                grid-template-columns: 1fr;
-            }
-
-            .timeline::before {
-                left: 10px;
-            }
-
-            .timeline-item,
-            .timeline-item:nth-child(even) {
-                width: 100%;
-                margin-left: 0;
-                padding-left: 35px;
-            }
-
-            h1 {
-                font-size: 4rem;
-            }
-        }
-    </style>
 </head>
+
 
 <body>
 
-    <!-- NAVBAR -->
+    <!-- CURSOR -->
 
-    <nav>
-        <div class="logo">LOKI</div>
+    <div class="cursor"></div>
 
-        <ul>
-            <li><a href="#inicio">Início</a></li>
-            <li><a href="#personagens">Personagens</a></li>
-            <li><a href="#galeria">Galeria</a></li>
-            <li><a href="#timeline">Linha do Tempo</a></li>
+
+    <!-- PARTICULAS -->
+
+    <div id="particles"></div>
+
+
+    <!-- PORTAL TEMPORAL -->
+
+    <div
+        class="time-portal"
+        id="timePortal"
+    ></div>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            LOKI
+            <span>TVA</span>
+        </div>
+
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="Abrir menu"
+        >
+            ☰
+        </button>
+
+
+        <ul
+            class="nav-links"
+            id="navLinks"
+        >
+
+            <li>
+                <a href="#inicio">Início</a>
+            </li>
+
+            <li>
+                <a href="#personagens">Variantes</a>
+            </li>
+
+            <li>
+                <a href="#galeria">Universo</a>
+            </li>
+
+            <li>
+                <a href="#timeline">Tempo</a>
+            </li>
+
+            <li>
+                <a href="#tva">TVA</a>
+            </li>
+
         </ul>
+
     </nav>
 
 
-    <!-- HERO -->
+    <!-- =========================
+         HERO
+    ========================== -->
 
-    <header class="hero" id="inicio">
+    <header
+        class="hero"
+        id="inicio"
+    >
+
+        <div class="hero-background"></div>
 
         <div class="hero-content">
 
-            <div class="tag">
-                Time Variance Authority
+            <div class="tva-warning">
+                VARIANTE DETECTADA
             </div>
 
-            <h1>LOKI</h1>
 
-            <h2>O Deus da Trapaça e as infinitas linhas do tempo.</h2>
-
-            <p>
-                Entre universos alternativos, paradoxos temporais e
-                variantes, Loki descobre que controlar o próprio destino
-                pode ser muito mais complicado do que parece.
+            <p class="eyebrow">
+                TIME VARIANCE AUTHORITY
             </p>
 
-            <a href="#personagens" class="btn">
-                Explorar a TVA
-            </a>
+
+            <h1>
+                LOKI
+            </h1>
+
+
+            <div class="title-line"></div>
+
+
+            <h2>
+                DEUS DA TRAPAÇA
+            </h2>
+
+
+            <p class="hero-description">
+
+                O tempo não é uma linha.
+                É uma floresta de possibilidades.
+
+                Entre variantes, paradoxos e universos,
+                uma nova história está prestes a começar.
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a
+                    href="#personagens"
+                    class="gold-button"
+                >
+                    Explorar variantes
+                </a>
+
+
+                <button
+                    class="portal-button"
+                    id="portalButton"
+                >
+                    Abrir portal
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-symbol">
+            ✦
+        </div>
+
+
+        <div class="scroll-indicator">
+
+            <span>
+                DESÇA
+            </span>
+
+            <div></div>
 
         </div>
 
     </header>
 
 
-    <!-- PERSONAGENS -->
+    <!-- =========================
+         INTRODUÇÃO
+    ========================== -->
 
-    <section id="personagens">
+    <section class="intro">
 
-        <h2 class="section-title">Variantes</h2>
+        <div class="section-label">
+            001 / ARQUIVO TEMPORAL
+        </div>
 
-        <p class="section-subtitle">
-            Personagens que atravessam diferentes linhas do tempo.
+
+        <h2>
+            UMA HISTÓRIA<br>
+            <span>FORA DO TEMPO</span>
+        </h2>
+
+
+        <p>
+
+            Depois de escapar de sua linha temporal,
+            Loki encontra uma organização capaz de
+            observar, controlar e manipular o fluxo
+            do tempo.
+
         </p>
 
-        <div class="cards">
+    </section>
 
-            <article class="card">
-                <h3>Loki</h3>
-                <p>
-                    O Deus da Trapaça, constantemente dividido entre
-                    seu desejo de poder e sua busca por um propósito maior.
-                </p>
+
+    <!-- =========================
+         PERSONAGENS
+    ========================== -->
+
+    <section
+        class="characters"
+        id="personagens"
+    >
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-number">
+                    002
+                </span>
+
+                <h2>
+                    VARIANTES
+                </h2>
+
+            </div>
+
+
+            <p>
+                Diferentes caminhos.<br>
+                A mesma essência.
+            </p>
+
+        </div>
+
+
+        <div class="character-grid">
+
+
+            <!-- LOKI -->
+
+            <article class="character-card">
+
+                <div class="character-image loki-image">
+
+                    <img
+                        src="images/loki.jpg"
+                        alt="Loki"
+                    >
+
+                    <div class="image-overlay"></div>
+
+                </div>
+
+
+                <div class="character-info">
+
+                    <span>
+                        VARIANTE 001
+                    </span>
+
+                    <h3>
+                        LOKI
+                    </h3>
+
+                    <p>
+                        O Deus da Trapaça,
+                        confrontado com a possibilidade
+                        de se tornar algo maior.
+                    </p>
+
+                    <button
+                        class="character-button"
+                        data-character="loki"
+                    >
+                        ACESSAR ARQUIVO
+                    </button>
+
+                </div>
+
             </article>
 
-            <article class="card">
-                <h3>Sylvie</h3>
-                <p>
-                    Uma variante de Loki que passou a vida fugindo da TVA
-                    e tentando descobrir quem realmente é.
-                </p>
+
+            <!-- SYLVIE -->
+
+            <article class="character-card">
+
+                <div class="character-image">
+
+                    <img
+                        src="images/sylvie.jpg"
+                        alt="Sylvie"
+                    >
+
+                    <div class="image-overlay"></div>
+
+                </div>
+
+
+                <div class="character-info">
+
+                    <span>
+                        VARIANTE 002
+                    </span>
+
+                    <h3>
+                        SYLVIE
+                    </h3>
+
+                    <p>
+                        Uma variante determinada a
+                        desafiar aqueles que tentam
+                        controlar seu destino.
+                    </p>
+
+                    <button
+                        class="character-button"
+                        data-character="sylvie"
+                    >
+                        ACESSAR ARQUIVO
+                    </button>
+
+                </div>
+
             </article>
 
-            <article class="card">
-                <h3>Mobius</h3>
-                <p>
-                    Um agente da TVA fascinado por jet skis e por
-                    investigações envolvendo variantes temporais.
-                </p>
-            </article>
 
-            <article class="card">
-                <h3>TVA</h3>
-                <p>
-                    A organização responsável por monitorar e controlar
-                    as diferentes ramificações da linha temporal.
-                </p>
+            <!-- MOBIUS -->
+
+            <article class="character-card">
+
+                <div class="character-image">
+
+                    <img
+                        src="images/mobius.jpg"
+                        alt="Mobius"
+                    >
+
+                    <div class="image-overlay"></div>
+
+                </div>
+
+
+                <div class="character-info">
+
+                    <span>
+                        AGENTE TVA
+                    </span>
+
+                    <h3>
+                        MOBIUS
+                    </h3>
+
+                    <p>
+                        Um investigador da TVA que
+                        começa a questionar a verdadeira
+                        natureza da organização.
+                    </p>
+
+                    <button
+                        class="character-button"
+                        data-character="mobius"
+                    >
+                        ACESSAR ARQUIVO
+                    </button>
+
+                </div>
+
             </article>
 
         </div>
@@ -544,40 +400,85 @@
     </section>
 
 
-    <!-- GALERIA -->
+    <!-- =========================
+         GALERIA
+    ========================== -->
 
-    <section id="galeria">
+    <section
+        class="universe"
+        id="galeria"
+    >
 
-        <h2 class="section-title">Fragmentos do Tempo</h2>
+        <div class="section-heading">
 
-        <p class="section-subtitle">
-            Uma estética inspirada em mistério, espaço e viagem temporal.
-        </p>
+            <div>
 
-        <div class="gallery">
+                <span class="section-number">
+                    003
+                </span>
 
-            <div class="gallery-item">
-                <img
-                    src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=900&q=80"
-                    alt="Universo e estrelas"
-                >
-                <span>Universo</span>
+                <h2>
+                    O MULTIVERSO
+                </h2>
+
             </div>
 
-            <div class="gallery-item">
-                <img
-                    src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=900&q=80"
-                    alt="Floresta misteriosa"
-                >
-                <span>Variantes</span>
+        </div>
+
+
+        <div class="universe-grid">
+
+            <div class="universe-card universe-one">
+
+                <div>
+
+                    <span>
+                        RAMIFICAÇÃO
+                    </span>
+
+                    <h3>
+                        INFINITAS<br>
+                        POSSIBILIDADES
+                    </h3>
+
+                </div>
+
             </div>
 
-            <div class="gallery-item">
-                <img
-                    src="https://images.unsplash.com/photo-1534791547706-1f20fc6c4c55?auto=format&fit=crop&w=900&q=80"
-                    alt="Galáxia"
-                >
-                <span>Linhas do Tempo</span>
+
+            <div class="universe-card universe-two">
+
+                <div>
+
+                    <span>
+                        LINHA TEMPORAL
+                    </span>
+
+                    <h3>
+                        O TEMPO<br>
+                        SE MOVE
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="universe-card universe-three">
+
+                <div>
+
+                    <span>
+                        MULTIVERSO
+                    </span>
+
+                    <h3>
+                        CADA ESCOLHA<br>
+                        CRIA UM MUNDO
+                    </h3>
+
+                </div>
+
             </div>
 
         </div>
@@ -585,27 +486,54 @@
     </section>
 
 
-    <!-- LINHA DO TEMPO -->
+    <!-- =========================
+         LINHA DO TEMPO
+    ========================== -->
 
-    <section id="timeline">
+    <section
+        class="timeline-section"
+        id="timeline"
+    >
 
-        <h2 class="section-title">Linha do Tempo</h2>
+        <div class="section-heading">
 
-        <p class="section-subtitle">
-            Uma pequena jornada através do caos temporal.
-        </p>
+            <div>
+
+                <span class="section-number">
+                    004
+                </span>
+
+                <h2>
+                    LINHA TEMPORAL
+                </h2>
+
+            </div>
+
+        </div>
+
 
         <div class="timeline">
 
-            <div class="timeline-item">
+            <div class="timeline-line"></div>
 
-                <div class="timeline-content">
 
-                    <h3>2012</h3>
+            <div class="timeline-event">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-box">
+
+                    <span>
+                        EVENTO 01
+                    </span>
+
+                    <h3>
+                        A VARIANTE
+                    </h3>
 
                     <p>
-                        Uma variante de Loki escapa após os acontecimentos
-                        de Nova York e acaba entrando no radar da TVA.
+                        Uma versão alternativa de Loki
+                        abandona sua trajetória original.
                     </p>
 
                 </div>
@@ -613,15 +541,24 @@
             </div>
 
 
-            <div class="timeline-item">
+            <div class="timeline-event right">
 
-                <div class="timeline-content">
+                <div class="timeline-dot"></div>
 
-                    <h3>A TVA</h3>
+                <div class="timeline-box">
+
+                    <span>
+                        EVENTO 02
+                    </span>
+
+                    <h3>
+                        A TVA
+                    </h3>
 
                     <p>
-                        Loki descobre uma organização que monitora
-                        diferentes acontecimentos temporais.
+                        Loki é levado para uma organização
+                        que existe fora do fluxo convencional
+                        do tempo.
                     </p>
 
                 </div>
@@ -629,15 +566,23 @@
             </div>
 
 
-            <div class="timeline-item">
+            <div class="timeline-event">
 
-                <div class="timeline-content">
+                <div class="timeline-dot"></div>
 
-                    <h3>As Variantes</h3>
+                <div class="timeline-box">
+
+                    <span>
+                        EVENTO 03
+                    </span>
+
+                    <h3>
+                        RAMIFICAÇÕES
+                    </h3>
 
                     <p>
-                        Diferentes versões de uma mesma pessoa podem
-                        existir em inúmeras ramificações da realidade.
+                        As linhas temporais começam a
+                        se multiplicar.
                     </p>
 
                 </div>
@@ -645,15 +590,23 @@
             </div>
 
 
-            <div class="timeline-item">
+            <div class="timeline-event right">
 
-                <div class="timeline-content">
+                <div class="timeline-dot"></div>
 
-                    <h3>O Multiverso</h3>
+                <div class="timeline-box">
+
+                    <span>
+                        EVENTO 04
+                    </span>
+
+                    <h3>
+                        O MULTIVERSO
+                    </h3>
 
                     <p>
-                        O conceito de uma única linha temporal começa
-                        a desaparecer diante das inúmeras possibilidades.
+                        As possibilidades deixam de ser
+                        apenas possibilidades.
                     </p>
 
                 </div>
@@ -665,120 +618,95 @@
     </section>
 
 
-    <!-- INTERAÇÃO -->
+    <!-- =========================
+         TVA
+    ========================== -->
 
-    <section class="tv-guide">
+    <section
+        class="tva-section"
+        id="tva"
+    >
 
-        <h2 class="section-title">
-            Arquivo da TVA
-        </h2>
+        <div class="tva-content">
 
-        <p>
-            Clique no botão para receber uma mensagem aleatória
-            de uma realidade alternativa.
-        </p>
+            <span class="section-number">
+                005
+            </span>
 
-        <div id="quote">
-            "O tempo está esperando."
+
+            <h2>
+                TIME VARIANCE<br>
+                <span>AUTHORITY</span>
+            </h2>
+
+
+            <p>
+                O arquivo temporal está ativo.
+                Escolha uma realidade para continuar.
+            </p>
+
+
+            <div
+                class="quote-box"
+                id="quote"
+            >
+                "O tempo está esperando."
+            </div>
+
+
+            <button
+                class="gold-button"
+                id="timelineButton"
+            >
+                GERAR RAMIFICAÇÃO
+            </button>
+
         </div>
 
-        <button class="btn" onclick="generateQuote()">
-            Acessar outra linha temporal
-        </button>
+
+        <div class="tva-symbol">
+
+            <div class="symbol-ring ring-one"></div>
+
+            <div class="symbol-ring ring-two"></div>
+
+            <div class="symbol-center">
+                TVA
+            </div>
+
+        </div>
 
     </section>
 
 
-    <!-- FOOTER -->
+    <!-- =========================
+         FOOTER
+    ========================== -->
 
     <footer>
 
+        <div class="footer-logo">
+            LOKI
+        </div>
+
+
         <p>
-            Projeto visual inspirado no universo de
-            <strong>Loki</strong>.
+            ARQUIVO TEMPORAL // TVA
         </p>
 
-        <p style="margin-top:10px;">
-            Este é um projeto de fã e não é um site oficial da Marvel Studios.
-        </p>
+
+        <small>
+            Projeto de fã inspirado no universo de Loki.
+            Não oficial.
+        </small>
 
     </footer>
 
 
     <!-- JAVASCRIPT -->
 
-    <script>
-
-        const quotes = [
-
-            "Toda escolha cria uma nova possibilidade.",
-
-            "O tempo não é uma linha. É uma floresta.",
-
-            "Talvez o propósito seja simplesmente continuar.",
-
-            "Cada variante carrega uma história diferente.",
-
-            "O destino pode ser apenas uma possibilidade.",
-
-            "A TVA está observando.",
-
-            "Uma pequena mudança pode criar uma nova realidade.",
-
-            "Você acabou de criar uma nova ramificação."
-        ];
-
-
-        function generateQuote() {
-
-            const quote =
-                quotes[Math.floor(Math.random() * quotes.length)];
-
-            const element =
-                document.getElementById("quote");
-
-            element.style.opacity = "0";
-
-            setTimeout(() => {
-
-                element.textContent = `"${quote}"`;
-
-                element.style.opacity = "1";
-
-            }, 250);
-
-        }
-
-
-        // Efeito de entrada nas seções
-
-        const observer =
-            new IntersectionObserver(
-                entries => {
-
-                    entries.forEach(entry => {
-
-                        if (entry.isIntersecting) {
-
-                            entry.target.style.animation =
-                                "aparecer 1s ease forwards";
-
-                        }
-
-                    });
-
-                },
-                {
-                    threshold: .15
-                }
-            );
-
-
-        document
-            .querySelectorAll("section")
-            .forEach(section => observer.observe(section));
-
-    </script>
+    <script src="script.js"></script>
 
 </body>
+
 </html>
